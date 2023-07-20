@@ -13,7 +13,7 @@ jobs:
       packages: write
 
     container:
-        image: quay.io/singularity/singularity
+        image: quay.io/singularity/singularity:v3.9.0
         options: --privileged
 
     name: Build Container
