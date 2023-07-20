@@ -24,4 +24,6 @@ From: ubuntu:20.04
     make install
 
 %runscript
-    exec splitcode $@
+    exec /bin/bash "$@"
+%startscript
+    exec /bin/bash "$@"
