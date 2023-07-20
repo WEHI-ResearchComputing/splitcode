@@ -1,0 +1,27 @@
+Bootstrap: docker
+From: ubuntu:20.04
+
+%labels
+    Author WEHI RCP Team
+    Maintainer  iskander.j@wehi.edu.au
+    URL https://www.wehi.edu.au
+
+%post
+    # Set timezone to Etc/UTC for tzdata. See issue #4365 for more details.
+    TZ=Etc/UTC && \
+        ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
+        echo $TZ > /etc/timezone
+
+    apt-get update && apt-get install -y git cmake \
+                        gcc \
+                        g++ make
+    git clone https://github.com/pachterlab/splitcode
+    cd splitcode
+    mkdir build
+    cd build
+    cmake .. -DZLIBNG=ON
+    make
+    make install
+
+%runscript
+    exec splitcode $@
